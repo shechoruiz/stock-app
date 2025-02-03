@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, FlatList, SafeAreaView, StatusBar } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
+import RNPickerSelect from "react-native-picker-select";
 import { stocks } from "./data/stocks";
-import { appStyles as styles } from "./styles/app";
+import { appStyles } from "./styles/app";
 
 export default function App() {
   const [sortBy, setSortBy] = useState("name");
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    console.log("Estado de sortBy actualizado a:", sortBy);
-  }, [sortBy]);
 
   const sortedStocks = () => {
     const stocksCopy = [...stocks];
-    console.log("Ordenando por:", sortBy);
 
     switch (sortBy) {
       case "price":
@@ -26,32 +20,24 @@ export default function App() {
     }
   };
 
-  const handleSortChange = (item) => {
-    console.log("Cambiando a:", item.value); // Verificar qué valor se está eligiendo
-    setSortBy(item.value); // Actualizamos el valor de sortBy
-  };
-
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={appStyles.safeArea}>
       <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <Text style={styles.title}>Stock Market</Text>
+      <View style={appStyles.container}>
+        <Text style={appStyles.title}>Stock Market</Text>
 
-        <Text style={styles.sortByText}>Ordenando por: {sortBy}</Text>
-
-        <DropDownPicker
+        <RNPickerSelect
+          onValueChange={(value) => setSortBy(value)}
           items={[
-            { label: "Ordenar por Nombre", value: "name" },
-            { label: "Ordenar por Precio", value: "price" },
-            { label: "Ordenar por Cambio Diario", value: "change" },
+            { label: "Order by name", value: "name" },
+            { label: "Order by price", value: "price" },
+            { label: "Order by daily change", value: "change" },
           ]}
           value={sortBy}
-          containerStyle={styles.pickerContainer}
-          style={styles.picker}
-          dropDownStyle={styles.dropDownStyle}
-          open={open}
-          setOpen={setOpen}
-          onChangeItem={handleSortChange}
+          style={{
+            inputIOS: appStyles.pickerInput,
+            inputAndroid: appStyles.pickerInput,
+          }}
         />
 
         <FlatList
