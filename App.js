@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, SafeAreaView, StatusBar } from "react-native";
+import { View, Text, FlatList, SafeAreaView } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { stocks } from "./data/stocks";
 import { appStyles } from "./styles/app";
@@ -22,7 +22,6 @@ export default function App() {
 
   return (
     <SafeAreaView style={appStyles.safeArea}>
-      <StatusBar barStyle="dark-content" />
       <View style={appStyles.container}>
         <Text style={appStyles.title}>Stock Market</Text>
 
