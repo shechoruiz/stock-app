@@ -13,6 +13,19 @@ export const appStyles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 10,
   },
+  pickerContainer: {
+    marginBottom: 20,
+    width: "100%",
+    zIndex: 10,
+  },
+  picker: {
+    height: 40,
+    backgroundColor: "#f0f0f0",
+  },
+  dropDownContainerStyle: {
+    backgroundColor: "#fafafa",
+    zIndex: 20,
+  },
   stockItem: {
     flexDirection: "row",
     justifyContent: "space-between",
